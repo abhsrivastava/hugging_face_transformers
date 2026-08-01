@@ -1,9 +1,9 @@
 # Hugging Face Transformers Learning Notebooks
 
 A collection of Python notebooks created while working through the Coursera
-Hugging Face Transformers tutorial. The notebooks cover tokenization, common
-Transformers pipelines, model discovery on the Hugging Face Hub, and batched
-chat-template tokenization with padding and attention masks.
+Hugging Face Transformers tutorial. The notebooks cover tokenization,
+task-specific model classes, inference, common Transformers pipelines, model
+discovery on the Hugging Face Hub, and batched chat-template tokenization.
 
 ## Notebooks
 
@@ -12,6 +12,7 @@ chat-template tokenization with padding and attention masks.
 | `HuggingFace_Tokenizer.ipynb` | Loading an `AutoTokenizer`, inspecting tokenizer metadata, encoding text, examining subword and special tokens, and decoding token IDs | [Open in Colab](https://colab.research.google.com/github/abhsrivastava/hugging_face_transformers/blob/main/HuggingFace_Tokenizer.ipynb) |
 | `HuggingFace_Transformers.ipynb` | Searching the Hub by pipeline task, sentiment classification, zero-shot image classification with CLIP, transparent-image preprocessing, and Whisper speech recognition | [Open in Colab](https://colab.research.google.com/github/abhsrivastava/hugging_face_transformers/blob/main/HuggingFace_Transformers.ipynb) |
 | `Padding_Truncation_AttentionMasks.ipynb` | Applying a model's chat template to a batch, left padding, truncation, PyTorch tensors, and attention masks | [Open in Colab](https://colab.research.google.com/github/abhsrivastava/hugging_face_transformers/blob/main/Padding_Truncation_AttentionMasks.ipynb) |
+| `AutoModelsForTask.ipynb` | Choosing a task-specific AutoModel class, inspecting model configuration and label mappings, running sentiment inference, interpreting logits/softmax/argmax, and understanding the classification head | [Open in Colab](https://colab.research.google.com/github/abhsrivastava/hugging_face_transformers/blob/main/AutoModelsForTask.ipynb) |
 
 ## What the notebooks demonstrate
 
@@ -23,6 +24,11 @@ chat-template tokenization with padding and attention masks.
 - Handling PNG transparency before passing an image to a model
 - Applying chat templates to multiple conversations in one batch
 - Using dynamic padding and attention masks for variable-length inputs
+- Choosing `AutoModelForSequenceClassification` for classification tasks
+- Inspecting model architecture, configuration, and label mappings
+- Running inference with `model.eval()` and `torch.no_grad()`
+- Converting logits to probabilities with softmax and selecting a label with argmax
+- Comparing a task-specific model with its base `AutoModel`
 
 ## Run in Google Colab
 
@@ -59,6 +65,8 @@ requirements vary by model.
 
 ## Notes
 
+- Use a task-specific model class when you need a prediction head. The base
+  `AutoModel` returns hidden representations but cannot directly classify text.
 - ImageNet-style classification chooses from a fixed label set. The image
   example instead uses CLIP for zero-shot classification with candidate labels.
 - Attention masks tell a model which padded positions to ignore; padding still
