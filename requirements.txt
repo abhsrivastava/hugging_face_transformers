@@ -1,0 +1,14 @@
+jupyter
+transformers
+datasets
+evaluate
+accelerate
+torch
+torchvision
+torchaudio
+huggingface_hub
+Pillow
+requests
+pandas
+scikit-learn
+matplotlib

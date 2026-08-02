@@ -66,7 +66,7 @@ inference with the saved model.
 | --- | --- | --- |
 | Google Colab in a browser | Colab browser editor | Remote Colab CPU/GPU |
 | Google Colab in VS Code | VS Code | Remote Colab CPU/GPU |
-| Fully local VS Code | VS Code | Your computer's CPU/GPU |
+| Fully local VS Code | VS Code | Apple Silicon CPU/GPU |
 
 ### Option 1: Google Colab in a browser
 
@@ -100,10 +100,13 @@ The packages, models, and training outputs in this mode live on the temporary
 Colab runtime, not on your local computer. Save anything important to GitHub,
 Google Drive, or your computer before disconnecting.
 
-### Option 3: Run fully locally in VS Code
+### Option 3: Run locally on an Apple Silicon Mac in VS Code
 
-Install [VS Code](https://code.visualstudio.com/), Python 3.10 or newer, and the
-same two extensions listed above. Clone and open the repository:
+The local instructions target a Mac with Apple Silicon. PyTorch uses Apple's
+Metal Performance Shaders (`mps`) backend to run supported operations on the
+integrated GPU. Install [VS Code](https://code.visualstudio.com/), Python 3.10
+or newer, and the same two extensions listed above. Clone and open the
+repository:
 
 ```bash
 git clone https://github.com/abhsrivastava/hugging_face_transformers.git
@@ -111,36 +114,40 @@ cd hugging_face_transformers
 code .
 ```
 
-In the VS Code terminal, create a project-specific virtual environment and
-install the notebook dependencies:
+In the VS Code terminal, create a project-specific virtual environment:
 
 ```bash
 python -m venv .venv
 ```
 
-Activate it on macOS or Linux:
+Activate it:
 
 ```bash
 source .venv/bin/activate
 ```
 
-Or activate it on Windows PowerShell:
-
-```powershell
-.venv\Scripts\Activate.ps1
-```
-
-Then install the packages:
+Then install the checked-in dependencies:
 
 ```bash
 python -m pip install --upgrade pip
-python -m pip install jupyter transformers datasets evaluate accelerate torch torchvision torchaudio huggingface_hub Pillow requests pandas scikit-learn matplotlib
+python -m pip install -r requirements.txt
 ```
+
+Confirm that PyTorch can see the Apple GPU:
+
+```bash
+python -c "import torch; print('MPS available:', torch.backends.mps.is_available())"
+```
+
+The expected result on a supported Apple Silicon Mac is `MPS available: True`.
+The notebooks choose CUDA on Google Colab, MPS on Apple Silicon, and CPU only
+when neither accelerator is available. Hugging Face `Trainer` detects MPS
+automatically.
 
 Open a notebook, choose **Select Kernel > Python Environments > .venv**, and run
 its cells. This mode uses your computer's memory, storage, CPU, and any locally
-configured GPU. Model downloads may require several gigabytes of disk space,
-and ModernBERT fine-tuning is much faster with a compatible GPU.
+available Apple GPU. Model downloads may require several gigabytes of disk
+space, and ModernBERT fine-tuning must fit in the Mac's unified memory.
 
 ## Models used
 
