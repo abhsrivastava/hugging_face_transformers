@@ -6,7 +6,30 @@ task-specific model classes, inference, common Transformers pipelines, model
 discovery on the Hugging Face Hub, batched chat-template tokenization,
 multilingual sentiment classification, and end-to-end model fine-tuning.
 
-## Notebooks
+## Featured examples
+
+### 1. End-to-end manual inference
+
+[`Full_End_to_End_Classification_Example.ipynb`](Full_End_to_End_Classification_Example.ipynb)
+builds a complete multilingual customer-feedback classifier without hiding the
+important steps behind a pipeline. It covers batched tokenization, dynamic
+padding, attention masks, device placement, `torch.no_grad()`, logits, softmax,
+argmax, confidence thresholds, human review, and business-routing rules.
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/abhsrivastava/hugging_face_transformers/blob/main/Full_End_to_End_Classification_Example.ipynb)
+
+### 2. End-to-end fine-tuning and inference
+
+[`Fine_Tuning_Example_End_to_End.ipynb`](Fine_Tuning_Example_End_to_End.ipynb)
+fine-tunes ModernBERT to classify Bugzilla reports into six severity levels. It
+covers data cleaning, numeric label encoding, stratified train/validation/test
+splits, dynamic padding, Hugging Face `Trainer`, macro F1, classification
+reports, a confusion matrix, model persistence, reloading from disk, and batch
+inference with the saved model.
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/abhsrivastava/hugging_face_transformers/blob/main/Fine_Tuning_Example_End_to_End.ipynb)
+
+## More learning notebooks
 
 | Notebook | Topics | Run in Colab |
 | --- | --- | --- |
@@ -14,8 +37,6 @@ multilingual sentiment classification, and end-to-end model fine-tuning.
 | `HuggingFace_Transformers.ipynb` | Searching the Hub by pipeline task, sentiment classification, zero-shot image classification with CLIP, transparent-image preprocessing, and Whisper speech recognition | [Open in Colab](https://colab.research.google.com/github/abhsrivastava/hugging_face_transformers/blob/main/HuggingFace_Transformers.ipynb) |
 | `Padding_Truncation_AttentionMasks.ipynb` | Applying a model's chat template to a batch, left padding, truncation, PyTorch tensors, and attention masks | [Open in Colab](https://colab.research.google.com/github/abhsrivastava/hugging_face_transformers/blob/main/Padding_Truncation_AttentionMasks.ipynb) |
 | `AutoModelsForTask.ipynb` | Choosing a task-specific AutoModel class, inspecting model configuration and label mappings, running sentiment inference, interpreting logits/softmax/argmax, and understanding the classification head | [Open in Colab](https://colab.research.google.com/github/abhsrivastava/hugging_face_transformers/blob/main/AutoModelsForTask.ipynb) |
-| `Full_End_to_End_Classification_Example.ipynb` | Building a multilingual sentiment workflow with batched tokenization, padding and attention masks, manual inference, confidence thresholds, business-routing rules, and pipeline comparisons | [Open in Colab](https://colab.research.google.com/github/abhsrivastava/hugging_face_transformers/blob/main/Full_End_to_End_Classification_Example.ipynb) |
-| `Fine_Tuning_Example_End_to_End.ipynb` | Fine-tuning ModernBERT on Bugzilla severity labels, using stratified data splits and dynamic padding, evaluating with macro F1 and a confusion matrix, and saving, reloading, and running the fine-tuned model | [Open in Colab](https://colab.research.google.com/github/abhsrivastava/hugging_face_transformers/blob/main/Fine_Tuning_Example_End_to_End.ipynb) |
 
 ## What the notebooks demonstrate
 
@@ -39,30 +60,87 @@ multilingual sentiment classification, and end-to-end model fine-tuning.
 - Evaluating a classifier with accuracy, macro F1, a classification report, and a confusion matrix
 - Saving a fine-tuned model, reloading it from disk, and using it for batch inference
 
-## Run in Google Colab
+## Choose where to run the notebooks
 
-Use an **Open in Colab** link in the table above. Each notebook installs its own
-Python dependencies, so you can run the cells from top to bottom in a fresh
-Colab runtime.
+| Experience | Editor | Compute |
+| --- | --- | --- |
+| Google Colab in a browser | Colab browser editor | Remote Colab CPU/GPU |
+| Google Colab in VS Code | VS Code | Remote Colab CPU/GPU |
+| Fully local VS Code | VS Code | Your computer's CPU/GPU |
+
+### Option 1: Google Colab in a browser
+
+Select an **Open in Colab** badge or link in this README. Each notebook installs
+its own Python packages, so it can be run from top to bottom in a fresh Colab
+runtime. For fine-tuning, select **Runtime > Change runtime type** and choose a
+GPU before running the notebook.
 
 The Transformers pipeline notebook reads a Hugging Face access token from
 Colab Secrets. Add a secret named `HF_TOKEN`, enable notebook access to it, and
 never place the token directly in a notebook cell.
 
-## Run locally
+### Option 2: Google Colab inside VS Code
 
-Python 3.10 or newer is recommended. Create a virtual environment and install
-the packages used by the notebooks:
+This option provides the VS Code editor while the notebook executes on a remote
+Google Colab runtime. Install these two VS Code extensions:
+
+1. [Google Colab](https://marketplace.visualstudio.com/items?itemName=google.colab)
+2. [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
+
+The Colab extension is built on the VS Code Jupyter extension and installs its
+required notebook support. Then:
+
+1. Clone this repository and open the folder in VS Code.
+2. Open one of the `.ipynb` files.
+3. Select **Select Kernel > Colab > Auto Connect**.
+4. Sign in to Google when prompted.
+5. Run the cells normally from VS Code.
+
+The packages, models, and training outputs in this mode live on the temporary
+Colab runtime, not on your local computer. Save anything important to GitHub,
+Google Drive, or your computer before disconnecting.
+
+### Option 3: Run fully locally in VS Code
+
+Install [VS Code](https://code.visualstudio.com/), Python 3.10 or newer, and the
+same two extensions listed above. Clone and open the repository:
+
+```bash
+git clone https://github.com/abhsrivastava/hugging_face_transformers.git
+cd hugging_face_transformers
+code .
+```
+
+In the VS Code terminal, create a project-specific virtual environment and
+install the notebook dependencies:
 
 ```bash
 python -m venv .venv
-source .venv/bin/activate
-python -m pip install jupyter transformers datasets evaluate accelerate torch torchvision torchaudio huggingface_hub Pillow requests pandas scikit-learn matplotlib
-jupyter notebook
 ```
 
-Model downloads may require several gigabytes of disk space. Runtime and memory
-requirements vary by model.
+Activate it on macOS or Linux:
+
+```bash
+source .venv/bin/activate
+```
+
+Or activate it on Windows PowerShell:
+
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+Then install the packages:
+
+```bash
+python -m pip install --upgrade pip
+python -m pip install jupyter transformers datasets evaluate accelerate torch torchvision torchaudio huggingface_hub Pillow requests pandas scikit-learn matplotlib
+```
+
+Open a notebook, choose **Select Kernel > Python Environments > .venv**, and run
+its cells. This mode uses your computer's memory, storage, CPU, and any locally
+configured GPU. Model downloads may require several gigabytes of disk space,
+and ModernBERT fine-tuning is much faster with a compatible GPU.
 
 ## Models used
 
