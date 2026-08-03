@@ -4,11 +4,30 @@ A collection of Python notebooks created while working through the Coursera
 Hugging Face Transformers tutorial. The notebooks cover tokenization,
 task-specific model classes, inference, common Transformers pipelines, model
 discovery on the Hugging Face Hub, batched chat-template tokenization,
-multilingual sentiment classification, and end-to-end model fine-tuning.
+multilingual sentiment classification, end-to-end model fine-tuning, publishing
+models to the Hugging Face Hub, and building interactive Gradio applications.
 
-## Featured examples
+## Featured projects
 
-### 1. End-to-end manual inference
+### 1. Fine-tune, deploy, and serve an IMDb sentiment classifier
+
+This first project follows a complete model lifecycle across two notebooks:
+
+1. [`DistilBERT_IMDB_FineTuning.ipynb`](DistilBERT_IMDB_FineTuning.ipynb)
+   fine-tunes DistilBERT on IMDb movie reviews, evaluates the classifier with
+   Hugging Face Evaluate, and publishes the trained model to the Hugging Face
+   Hub.
+2. [`Gradio_App_Example.ipynb`](Gradio_App_Example.ipynb) loads the published
+   fine-tuned model and builds a Gradio interface for interactive sentiment
+   predictions.
+
+Together, the notebooks demonstrate the path from labeled training data to a
+deployed model and a usable web interface.
+
+[![Open fine-tuning notebook in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/abhsrivastava/hugging_face_transformers/blob/main/DistilBERT_IMDB_FineTuning.ipynb)
+[![Open Gradio app notebook in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/abhsrivastava/hugging_face_transformers/blob/main/Gradio_App_Example.ipynb)
+
+### 2. End-to-end manual inference
 
 [`Full_End_to_End_Classification_Example.ipynb`](Full_End_to_End_Classification_Example.ipynb)
 builds a complete multilingual customer-feedback classifier without hiding the
@@ -18,7 +37,7 @@ argmax, confidence thresholds, human review, and business-routing rules.
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/abhsrivastava/hugging_face_transformers/blob/main/Full_End_to_End_Classification_Example.ipynb)
 
-### 2. End-to-end fine-tuning and inference
+### 3. End-to-end fine-tuning and inference
 
 [`Fine_Tuning_Example_End_to_End.ipynb`](Fine_Tuning_Example_End_to_End.ipynb)
 fine-tunes ModernBERT to classify Bugzilla reports into six severity levels. It
@@ -59,6 +78,9 @@ inference with the saved model.
 - Fine-tuning a sequence-classification model with the Hugging Face `Trainer`
 - Evaluating a classifier with accuracy, macro F1, a classification report, and a confusion matrix
 - Saving a fine-tuned model, reloading it from disk, and using it for batch inference
+- Publishing a fine-tuned model to the Hugging Face Hub
+- Loading a deployed model from the Hub for inference
+- Building an interactive Gradio UI around a fine-tuned classifier
 
 ## Choose where to run the notebooks
 
@@ -159,8 +181,9 @@ space, and ModernBERT fine-tuning must fit in the Mac's unified memory.
 - `tabularisai/multilingual-sentiment-analysis`
 - `answerdotai/ModernBERT-base`
 
-## Dataset used for fine-tuning
+## Datasets used for fine-tuning
 
+- [`stanfordnlp/imdb`](https://huggingface.co/datasets/stanfordnlp/imdb) — IMDb movie reviews labeled for binary positive/negative sentiment classification
 - [`AliArshad/Bugzilla_Eclipse_Bug_Reports_Dataset`](https://huggingface.co/datasets/AliArshad/Bugzilla_Eclipse_Bug_Reports_Dataset) — historical Bugzilla reports labeled as `blocker`, `critical`, `major`, `normal`, `minor`, or `trivial`
 
 ## Notes
