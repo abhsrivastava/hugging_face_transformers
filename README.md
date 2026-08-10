@@ -24,6 +24,8 @@ This is the repository's most complete deployment example: it demonstrates not
 only how to build a streaming Gradio interface, but also how to publish, verify,
 and consume it as a hosted application.
 
+[**Try the live NovaPay chatbot on Hugging Face Spaces →**](https://huggingface.co/spaces/abhishes/novapay-chatbot)
+
 [![Open Spaces deployment notebook in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/abhsrivastava/hugging_face_transformers/blob/main/HuggingFace_Spaces_example.ipynb)
 
 ### 2. Fine-tune, deploy, and serve an IMDb sentiment classifier
