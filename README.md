@@ -6,12 +6,29 @@ task-specific model classes, inference, common Transformers pipelines, model
 discovery on the Hugging Face Hub, batched chat-template tokenization,
 multilingual sentiment classification, end-to-end model fine-tuning, publishing
 models to the Hugging Face Hub, and building interactive Gradio applications.
+The repository now also includes a complete Hugging Face Spaces deployment
+workflow.
 
 ## Featured projects
 
-### 1. Fine-tune, deploy, and serve an IMDb sentiment classifier
+### 1. Hero project: Deploy a streaming NovaPay chatbot to Hugging Face Spaces
 
-This first project follows a complete model lifecycle across two notebooks:
+[`HuggingFace_Spaces_example.ipynb`](HuggingFace_Spaces_example.ipynb) takes a
+Gradio chatbot from notebook code to a running Hugging Face Space. It creates
+the Space through the Hugging Face Hub API, generates and validates `app.py`,
+uploads the application and its dependencies, stores the Hugging Face token as
+a Space secret, monitors the deployment until it is running, reconnects through
+`gradio_client`, and sends test requests to the deployed application.
+
+This is the repository's most complete deployment example: it demonstrates not
+only how to build a streaming Gradio interface, but also how to publish, verify,
+and consume it as a hosted application.
+
+[![Open Spaces deployment notebook in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/abhsrivastava/hugging_face_transformers/blob/main/HuggingFace_Spaces_example.ipynb)
+
+### 2. Fine-tune, deploy, and serve an IMDb sentiment classifier
+
+This project follows a complete model lifecycle across two notebooks:
 
 1. [`DistilBERT_IMDB_FineTuning.ipynb`](DistilBERT_IMDB_FineTuning.ipynb)
    fine-tunes DistilBERT on IMDb movie reviews, evaluates the classifier with
@@ -27,7 +44,7 @@ deployed model and a usable web interface.
 [![Open fine-tuning notebook in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/abhsrivastava/hugging_face_transformers/blob/main/DistilBERT_IMDB_FineTuning.ipynb)
 [![Open Gradio app notebook in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/abhsrivastava/hugging_face_transformers/blob/main/Gradio_App_Example.ipynb)
 
-### 2. End-to-end manual inference
+### 3. End-to-end manual inference
 
 [`Full_End_to_End_Classification_Example.ipynb`](Full_End_to_End_Classification_Example.ipynb)
 builds a complete multilingual customer-feedback classifier without hiding the
@@ -37,7 +54,7 @@ argmax, confidence thresholds, human review, and business-routing rules.
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/abhsrivastava/hugging_face_transformers/blob/main/Full_End_to_End_Classification_Example.ipynb)
 
-### 3. End-to-end fine-tuning and inference
+### 4. End-to-end fine-tuning and inference
 
 [`Fine_Tuning_Example_End_to_End.ipynb`](Fine_Tuning_Example_End_to_End.ipynb)
 fine-tunes ModernBERT to classify Bugzilla reports into six severity levels. It
@@ -81,6 +98,10 @@ inference with the saved model.
 - Publishing a fine-tuned model to the Hugging Face Hub
 - Loading a deployed model from the Hub for inference
 - Building an interactive Gradio UI around a fine-tuned classifier
+- Creating and configuring a Hugging Face Space programmatically
+- Deploying a streaming Gradio chatbot with generated application files
+- Managing Space secrets, monitoring deployment status, and testing the hosted
+  app with `gradio_client`
 
 ## Choose where to run the notebooks
 
